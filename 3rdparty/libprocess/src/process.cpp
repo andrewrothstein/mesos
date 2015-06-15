@@ -836,7 +836,7 @@ void initialize(const string& delegate)
   __address__ = bind.get();
 
   // If public ip and port are present, use them instead
-  value = getenv("LIBPROCESS_PUBLIC_IP");
+  value = os::getenv("LIBPROCESS_PUBLIC_IP");
   if (value.isSome()) {
     Try<net::IP> ip = net::IP::parse(value.get(), AF_INET);
     if (ip.isError()) {
@@ -846,7 +846,7 @@ void initialize(const string& delegate)
     __address__.ip = ip.get();
   }
 
-  value = getenv("LIBPROCESS_PUBLIC_PORT");
+  value = os::getenv("LIBPROCESS_PUBLIC_PORT");
   if (value.isSome()) {
     int result = atoi(value.get().c_str());
     if (result < 0 || result > USHRT_MAX) {
